@@ -75,11 +75,11 @@ def main():
         
         print("Signed in!")
 
-        # In case we need to wait for redirect after duo auth
-        while (wait_for_url(driver.current_url)):
-            sleep(0.5)
-            print("waiting for page redirect")
-            continue
+    # In case we need to wait for redirect after duo auth
+    while not re.match(URL_fs_re, driver.current_url):
+        sleep(0.5)
+        print("waiting for page redirect")
+        continue
 
     # Check if it was successful
     if re.match(URL_fs_re, driver.current_url):
